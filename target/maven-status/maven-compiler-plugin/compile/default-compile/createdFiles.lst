@@ -1,0 +1,14 @@
+com\fixitnow\model\entity\Direccion.class
+com\fixitnow\model\entity\PresupuestoOferta.class
+com\fixitnow\model\enums\EstadoOferta.class
+com\fixitnow\model\enums\NivelUrgencia.class
+com\fixitnow\model\entity\ResenaCalificacion.class
+com\fixitnow\FixItNowApplication.class
+com\fixitnow\model\enums\EstadoSolicitud.class
+com\fixitnow\model\entity\PerfilProfesional.class
+com\fixitnow\model\entity\Rol.class
+com\fixitnow\model\entity\SolicitudServicio.class
+com\fixitnow\model\enums\RolNombre.class
+com\fixitnow\model\entity\Usuario.class
+com\fixitnow\model\entity\SolicitudServicio$1.class
+com\fixitnow\model\entity\CategoriaOficio.class

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixIt Now - Plataforma de Oficios del Hogar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #6366F1;
+            --primary-dark: #3730A3;
+            --secondary: #06B6D4;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --bg-dark: #0F172A;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --border-card: rgba(255, 255, 255, 0.1);
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-card);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34D399;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .hero-chip {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.15);
+            color: #A5B4FC;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #FFFFFF, #CBD5E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #818CF8, #38BDF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(79, 70, 229, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid var(--border-card);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Grid Cards */
+        .section-title {
+            font-size: 26px;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #F1F5F9;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .category-pill {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .category-pill:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary-light);
+            transform: scale(1.03);
+        }
+
+        .category-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .category-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Simulator Widget */
+        .simulator-box {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .sim-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+        }
+
+        .sim-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .sim-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .sim-input {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-card);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .sim-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .sim-result {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #38BDF8;
+            margin: 8px 0;
+        }
+
+        /* Database Info Box */
+        .db-info {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #CBD5E1;
+            margin-top: 14px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-card);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container nav-content">
+            <a href="/" class="logo">
+                <span class="logo-badge">⚡</span>
+                FixIt Now
+            </a>
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                Backend Spring Boot 3 Activo
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="container hero">
+        <div class="hero-chip">🚀 Proyecto Integrador • 3º Año Desarrollo de Software</div>
+        <h1>Plataforma de Intermediación y Matching Georreferenciado <span>FixIt Now</span></h1>
+        <p>Conectando en tiempo real la demanda domiciliaria de clientes con profesionales calificados de oficios mediante algoritmos de geolocalización y cotizaciones transparentes.</p>
+        
+        <div class="btn-group">
+            <a href="/h2-console" target="_blank" class="btn btn-primary">
+                📊 Abrir Consola H2 Database
+            </a>
+            <a href="#simulador" class="btn btn-secondary">
+                🌐 Probar Motor de Matching Haversine
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Categorías Pre-cargadas en BD -->
+        <h2 class="section-title">🛠️ Categorías de Oficios Activas (data.sql)</h2>
+        <div class="categories-grid">
+            <div class="category-pill">
+                <div class="category-icon">🚰</div>
+                <div class="category-name">Plomería</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">⚡</div>
+                <div class="category-name">Electricidad</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">🔥</div>
+                <div class="category-name">Gasista</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">🔑</div>
+                <div class="category-name">Cerrajería</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">🎨</div>
+                <div class="category-name">Pintura</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">🧱</div>
+                <div class="category-name">Albañilería</div>
+            </div>
+            <div class="category-pill">
+                <div class="category-icon">❄️</div>
+                <div class="category-name">Climatización</div>
+            </div>
+        </div>
+
+        <!-- Interactive Haversine Simulator -->
+        <h2 id="simulador" class="section-title">📍 Simulador del Algoritmo de Matching Geográfico (Haversine)</h2>
+        <div class="simulator-box">
+            <div class="sim-grid">
+                <div>
+                    <h3 style="margin-bottom: 14px;">Coordenadas y Radio</h3>
+                    <div class="sim-group">
+                        <label>📍 Ubicación del Profesional (Base Operativa)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input id="profLat" type="number" step="0.0001" value="-34.6037" class="sim-input" style="flex:1;" placeholder="Latitud">
+                            <input id="profLon" type="number" step="0.0001" value="-58.3816" class="sim-input" style="flex:1;" placeholder="Longitud">
+                        </div>
+                        <small style="color: #64748B;">Ej: Obelisco, CABA (-34.6037, -58.3816)</small>
+                    </div>
+
+                    <div class="sim-group">
+                        <label>📍 Ubicación de la Solicitud (Cliente)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input id="clientLat" type="number" step="0.0001" value="-34.6186" class="sim-input" style="flex:1;" placeholder="Latitud">
+                            <input id="clientLon" type="number" step="0.0001" value="-58.3695" class="sim-input" style="flex:1;" placeholder="Longitud">
+                        </div>
+                        <small style="color: #64748B;">Ej: Puerto Madero (-34.6186, -58.3695)</small>
+                    </div>
+
+                    <div class="sim-group">
+                        <label>📏 Radio de Cobertura del Profesional (km)</label>
+                        <input id="profRadius" type="number" step="1" value="10" class="sim-input">
+                    </div>
+
+                    <button onclick="calcularDistancia()" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                        Calcular Distancia y Elegibilidad
+                    </button>
+                </div>
+
+                <div class="sim-result">
+                    <span style="font-size: 14px; color: var(--text-muted);">Distancia Calculada (Haversine)</span>
+                    <div id="distanciaResultado" class="result-value">2.01 km</div>
+                    <div id="elegibilidadTag" class="status-pill" style="margin-top: 10px;">
+                        ✅ Profesional Elegible para la Solicitud
+                    </div>
+                    <p id="explicacionMatching" style="color: var(--text-muted); font-size: 13px; margin-top: 16px;">
+                        La distancia (2.01 km) es menor o igual al radio de cobertura configurado (10 km).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulos y Arquitectura -->
+        <h2 class="section-title">🏛️ Arquitectura y Modelo de Datos (Fase 1 Lista)</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🗄️</div>
+                <h3>Base de Datos H2</h3>
+                <p>8 entidades JPA creadas con relaciones relacionales estrictas y precarga automática de datos.</p>
+                <div class="db-info">
+                    <strong>Acceso Consola H2:</strong><br>
+                    • JDBC URL: <code>jdbc:h2:mem:fixitdb</code><br>
+                    • Usuario: <code>sa</code><br>
+                    • Password: <em>(vacío)</em>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Máquina de Estados</h3>
+                <p>Control del ciclo de vida del servicio: <code>PUBLICADA</code> ➔ <code>ASIGNADA</code> ➔ <code>EN_CAMINO</code> ➔ <code>EN_PROCESO</code> ➔ <code>FINALIZADA</code> ➔ <code>CALIFICADA</code>.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⭐</div>
+                <h3>Sistema de Calificaciones</h3>
+                <p>Recálculo acumulativo automático de promedios de 1 a 5 estrellas con reseñas para cada profesional.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>FixIt Now</strong> • Proyecto Integrador 3º Año • IES Manuel Belgrano</p>
+            <p style="margin-top: 6px; font-size: 12px;">Equipo: Laura Bernabéu • Salvador Duch • María Paz Torres</p>
+        </div>
+    </footer>
+
+    <script>
+        function calcularDistancia() {
+            const lat1 = parseFloat(document.getElementById('profLat').value);
+            const lon1 = parseFloat(document.getElementById('profLon').value);
+            const lat2 = parseFloat(document.getElementById('clientLat').value);
+            const lon2 = parseFloat(document.getElementById('clientLon').value);
+            const radio = parseFloat(document.getElementById('profRadius').value);
+
+            const R = 6371; // Radio de la Tierra en km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const d = R * c;
+
+            const resElement = document.getElementById('distanciaResultado');
+            const tagElement = document.getElementById('elegibilidadTag');
+            const expElement = document.getElementById('explicacionMatching');
+
+            resElement.innerText = d.toFixed(2) + ' km';
+
+            if (d <= radio) {
+                tagElement.className = 'status-pill';
+                tagElement.style.background = 'rgba(16, 185, 129, 0.15)';
+                tagElement.style.color = '#34D399';
+                tagElement.innerText = '✅ Profesional Elegible para la Solicitud';
+                expElement.innerText = `La distancia (${d.toFixed(2)} km) es menor o igual al radio de cobertura configurado (${radio} km).`;
+            } else {
+                tagElement.className = 'status-pill';
+                tagElement.style.background = 'rgba(239, 68, 68, 0.15)';
+                tagElement.style.color = '#F87171';
+                tagElement.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                tagElement.innerText = '❌ Fuera de Radio de Cobertura';
+                expElement.innerText = `La distancia (${d.toFixed(2)} km) excede el radio de cobertura (${radio} km). No se emitirá notificación al profesional.`;
+            }
+        }
+    </script>
+</body>
+</html>
